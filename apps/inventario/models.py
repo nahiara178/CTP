@@ -9,7 +9,7 @@ class Estudiante(models.Model):
     def __str__(self):
         return self.nombre
 # Create your models here.
-class computadora(models.Model):
+class Computadora(models.Model):
     marca= models.CharField()
     num_serie= models.CharField()
     descripcion= models.CharField()
@@ -18,24 +18,23 @@ class computadora(models.Model):
     def __str__(self):
         return self.numero
     
-class curso(models.Model):
+class Curso(models.Model):
     nombre = models.CharField()
 
     def __str__(self):
         return self.nombre
         
-class materia(models.Model):
+class Materia(models.Model):
     nombre = models.CharField()
-
+    Curso= models.ForeignKey(Curso, on_delete=models.CASCADE)
     def __str__(self):
         return self.nombre
 
-class prestamo(models.Model):
+class Prestamo(models.Model):
     fecha = models.CharField()
-    nombre_est= models.CharField()
-    materia= models.CharField()
-    curso= models.CharField()
-    num_comp= models.CharField()
+    Curso= models.ForeignKey(Curso, on_delete= models.CASCADE)
+    Computadora = models.ForeignKey(Computadora, on_delete= models.CASCADE)
+    Estudiante= models.ForeignKey(Estudiante, on_delete= models.CASCADE)
 
     def __str__(self):
         return f"{self.fecha}{self.num_comp}"           
